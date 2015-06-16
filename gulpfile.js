@@ -9,10 +9,17 @@ var gulp = require('gulp'),
 		nodemon = require('gulp-nodemon'),
 		react = require('gulp-react'),
 		concat = require('gulp-concat'),
-		bower = require('gulp-bower'),
 		reload = browserSync.reload;
 
-gulp.task('default', ['start', 'bower', 'copy', 'browser-sync', 'transform', 'styles', 'watch']);
+function handleError (err) {
+  console.log(err.toString());
+  process.exit(-1);
+}
+
+
+gulp.task('default', ['start', 'bowercopy', 'copy', 'browser-sync', 'transform', 'styles', 'watch']);
+
+gulp.task('serve', ['start', 'bowercopy', 'browser-sync']);
 
 gulp.task('start', function() {
 	nodemon({
@@ -31,8 +38,16 @@ gulp.task('transform', function() {
 		.pipe(jshint.reporter('jshint-stylish'))
 		.pipe(react())
 		.pipe(concat('build.min.js'))
+		.pipe(uglify())
+		.on('error', handleError)
 		.pipe(gulp.dest('./build/js/'))
 		.pipe(reload({stream: true}));
+});
+
+gulp.task('minify', function() {
+	gulp.src('./build/js/build.min.js')
+		.pipe(uglify())
+		.on('error', handleError);
 });
 
 gulp.task('copy', function(){
@@ -54,7 +69,7 @@ gulp.task('styles', function() {
 
 gulp.task('browser-sync', function() {
 	browserSync({
-		server: { baseDir: "./build" }
+		proxy: "localhost:8080"
 	});
 });
 
