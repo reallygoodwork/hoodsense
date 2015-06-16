@@ -1,4 +1,6 @@
-React.render(
-  <CommentBox />,
-  document.getElementById('app')
-);
+// Hoodwrap
+	// - Hoodheader
+	// - Hoodfeed
+		// - Hooditem
+
+React.render(<Hoodwrap />, document.getElementById('app'));

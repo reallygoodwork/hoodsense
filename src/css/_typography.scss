@@ -30,10 +30,10 @@ $base-font-size: 12px;
   }
 }
 
-@include importfont('mission script', 'fonts/mission-script-webfont', 300);
+// @include importfont('mission script', 'fonts/mission-script-webfont', 300);
 
-$baseFont: 'Helvetica' ,sans-serif;
-$titleFont: 'mission script', serif;
+$baseFont: 'Helvetica Neue' ,sans-serif;
+$titleFont: 'Helvetica Neue', serif;
 
 
 /* Base Styles
