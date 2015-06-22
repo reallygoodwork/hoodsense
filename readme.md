@@ -35,9 +35,14 @@ If you're interested in simply running the app, just run the following
 
 	gulp serve
 
----
-To do:
+### API
 
-Add in req for neighbourhood and city search
+To get apartment listings, the endpoint will be `http://localhost:8080/api` or `http://localhost:3000/api`.
+
+You MUST the following parameters: Location, rooms and price. So the endpoint becomes
+
+	http://localhost:3000/api?location=queen+west&price=2000&rooms=2
+
+## Party on
 
 
