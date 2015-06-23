@@ -9,7 +9,7 @@ api.home = function(req, res) {
 }
 
 api.getListings = function (req, res) {
-
+	res.contentType('application/json');
 	if (api.data.length > 2) {
 		api.data.length = [];
 	}
@@ -58,9 +58,9 @@ api.getListings = function (req, res) {
 			var a = api.data[0];
 			var b = api.data[1];
 			var c = a.concat(b);
-			res.json(c);
+			res.jsonp(c);
 		} else {
-			res.json({
+			res.jsonp({
 				error: 'timeout'
 			});
 		};
