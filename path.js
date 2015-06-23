@@ -51,9 +51,20 @@ api.getListings = function (req, res) {
 			 api.data.push(obj)
 			});
 		}
+
 		CLbuild(clURL);
 		KJbuild(kjURL);
-		res.json(api.data);
+		if (api.data.length > 0) {
+			var a = api.data[0];
+			var b = api.data[1];
+			var c = a.concat(b);
+			res.json(c);
+		} else {
+			res.json({
+				error: 'timeout'
+			});
+		};
+		
 
 	}
 
