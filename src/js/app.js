@@ -1,6 +1,1 @@
-// Hoodwrap
-	// - Hoodheader
-	// - Hoodfeed
-		// - Hooditem
-
-React.render(<Hoodwrap />, document.getElementById('app'));
+console.log('@drewisthe')
