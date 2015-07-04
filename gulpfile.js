@@ -17,7 +17,7 @@ function handleError (err) {
 }
 
 
-gulp.task('default', ['start', 'bowercopy', 'copy', 'browser-sync', 'transform', 'styles', 'watch']);
+gulp.task('default', ['start', 'copy', 'browser-sync', 'transform', 'styles', 'watch']);
 
 gulp.task('serve', ['start', 'bowercopy', 'browser-sync']);
 
