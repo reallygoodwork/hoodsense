@@ -30,18 +30,21 @@ api.getListings = function (req, res) {
 			clURL = 'http://toronto.craigslist.ca/search/apa?maxAsk=' + price + '&bedrooms=' + rooms + '&query=' + location + '#pic';
 		}
 
+		console.log(kjURL);
+		console.log(clURL);
+
 		function CLbuild(url) {
 			x(url, 'p.row', [{
 			  title: '.txt .hdrlnk',
 			  link: '.txt a.hdrlnk@href',
 			  posted: '.pl time@title',
 			  price: '.txt .price',
-			  pic: x('.txt a.hdrlnk@href', '.body img@src')
+			  pic: x('.txt a.hdrlnk@href', '.body img@src'),
+			  location: x('.txt a.hdrlnk@href', '.body .mapaddress')
 			}])
 			(function(err, obj) {
 				if (err)
 					res.send(err);
-					console.log(obj);
 				 api.data.push(obj);
 				 KJbuild(kjURL);
 			});
@@ -51,14 +54,14 @@ api.getListings = function (req, res) {
 			x(url, '.regular-ad', [{
 				title: '.description a.title',
 				link: '.description a@href',
-				posted: '.posted',
+				posted: x('.description a@href', 'table.ad-attributes tr:nth-child(1) td'),
 				price: '.price',
-				pic: x('.description a@href', 'li.showing img@src')
+				pic: x('.description a@href', 'li.showing img@src'),
+				location: x('.description a@href', 'table.ad-attributes tr:nth-child(3) td')
 			}])
 			(function(err, obj) {
 				if (err)
 					res.send(err);
-				console.log(obj)
 				 api.data.push(obj)
 				 var a = api.data[0];
 				 var b = api.data[1];
