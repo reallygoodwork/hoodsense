@@ -2,13 +2,16 @@
   "name": "hoodsort",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "engines": {
+    "node": "0.12.2"
+  },
+  "dependencies": {
     "browser-sync": "^2.7.11",
     "express": "^4.12.4",
     "gulp": "^3.9.0",
@@ -24,6 +27,6 @@
     "jshint-stylish": "^2.0.0",
     "morgan": "^1.6.0",
     "path": "^0.11.14",
-    "x-ray": "^2.0.0"
+    "x-ray": "2.0.0"
   }
 }
