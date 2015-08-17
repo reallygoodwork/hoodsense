@@ -1,6 +1,6 @@
 var express = require('express'),
 		app = express(),
-		port = process.env.port || 8080,
+		port = process.env.port || 5000,
 		morgan = require('morgan'),
 		path = require('path'),
 		routes = require('./path.js');
@@ -20,4 +20,4 @@ app.get('/', routes.home);
 app.get('/api', routes.getListings);
 
 app.listen(port);
-console.log('RUNNING ON 8080 YO');
+console.log('RUNNING ON 5000 YO');
