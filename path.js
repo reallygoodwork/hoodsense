@@ -5,7 +5,7 @@ var Xray = require('x-ray'),
 api.data = [];
 
 api.home = function(req, res) {
-	res.sendFile(__dirname + '/build');
+	res.render('pages/index');
 }
 
 api.getListings = function (req, res) {
@@ -30,21 +30,18 @@ api.getListings = function (req, res) {
 			clURL = 'http://toronto.craigslist.ca/search/apa?maxAsk=' + price + '&bedrooms=' + rooms + '&query=' + location + '#pic';
 		}
 
-		console.log(kjURL);
-		console.log(clURL);
-
 		function CLbuild(url) {
 			x(url, 'p.row', [{
 			  title: '.txt .hdrlnk',
 			  link: '.txt a.hdrlnk@href',
 			  posted: '.pl time@title',
 			  price: '.txt .price',
-			  pic: x('.txt a.hdrlnk@href', '.body img@src'),
-			  location: x('.txt a.hdrlnk@href', '.body .mapaddress')
+			  pic: x('.txt a.hdrlnk@href', '.body img@src')
 			}])
 			(function(err, obj) {
 				if (err)
 					res.send(err);
+					console.log(obj);
 				 api.data.push(obj);
 				 KJbuild(kjURL);
 			});
@@ -54,23 +51,23 @@ api.getListings = function (req, res) {
 			x(url, '.regular-ad', [{
 				title: '.description a.title',
 				link: '.description a@href',
-				posted: x('.description a@href', 'table.ad-attributes tr:nth-child(1) td'),
+				posted: '.posted',
 				price: '.price',
-				pic: x('.description a@href', 'li.showing img@src'),
-				location: x('.description a@href', 'table.ad-attributes tr:nth-child(3) td')
+				pic: x('.description a@href', 'li.showing img@src')
 			}])
 			(function(err, obj) {
 				if (err)
 					res.send(err);
+				console.log(obj)
 				 api.data.push(obj)
 				 var a = api.data[0];
 				 var b = api.data[1];
 				 var c = a.concat(b);
-				 res.jsonp(c);
+				 res.send(a);
 			});
 		}
 
-		CLbuild(clURL);
+		KJbuild(kjURL);
 	}
 }
 
