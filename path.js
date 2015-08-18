@@ -5,7 +5,7 @@ var Xray = require('x-ray'),
 api.data = [];
 
 api.home = function(req, res) {
-	res.sendFile(__dirname + '/build');
+	res.render('pages/index');
 }
 
 api.getListings = function (req, res) {
@@ -63,11 +63,11 @@ api.getListings = function (req, res) {
 				 var a = api.data[0];
 				 var b = api.data[1];
 				 var c = a.concat(b);
-				 res.jsonp(c);
+				 res.send(a);
 			});
 		}
 
-		CLbuild(clURL);
+		KJbuild(kjURL);
 	}
 }
 
